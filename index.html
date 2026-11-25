@@ -34,6 +34,7 @@ button:focus,button:focus-visible{outline:none}
 .spot .tag{position:absolute;left:50%;bottom:calc(100% + 12px);transform:translateX(-50%);white-space:nowrap;font-size:14px;font-weight:700;color:#fff;
   background:linear-gradient(90deg,#fa7e1e,#d62976,#962fbf);padding:5px 13px;border-radius:999px;box-shadow:0 6px 18px rgba(150,47,191,.3)}
 .spot.below .tag{bottom:auto;top:calc(100% + 12px)}
+.spot.tl .tag{left:6px;transform:none}.spot.tr .tag{left:auto;right:6px;transform:none}
 
 .dots{display:flex;gap:8px;align-items:center}
 .dots button{font-size:13px;font-weight:700;color:var(--sub);padding:5px 12px;border-radius:999px;background:#f1f2f5;transition:all .3s}
@@ -105,24 +106,24 @@ const CONFIG = {
     { page:1, label:"소개 세 줄", box:{x:5.4,y:31.9,w:89.2,h:12.6},
       kick:"소개", title:"캐릭터가 자기를 소개하는 세 줄",
       points:["<b>소속, 성격, 좋아하는 것, 말버릇</b>을 한 줄씩", "글은 모두 <b>캐릭터의 말투</b>로", "이모지·해시태그도 좋음"] },
-    { page:1, label:"스토리 하이라이트 (선택)", box:{x:5,y:49.3,w:90,h:18.3},
+    { page:1, label:"스토리 하이라이트 (선택)", box:{x:5,y:48.3,w:90,h:16.3},
       kick:"하이라이트 · 선택", title:"프로필에 고정해 두는 이야기",
       points:["<b>0~3개</b>, 만들지 말지 스스로 정함", "동그라미에 표지 그림, 아래에 <b>짧은 제목</b>", "안 만들면 비워 둬도 됨"],
       ex:"🧡랑아🧡 / 🤍호야🤍 / 💛은향이💛, 대길이 아끼는 가족" },
-    { page:1, label:"피드 첫 칸 · 세계관 속 캐릭터의 역할", box:{x:2.38,y:74.46,w:31.37,h:22.18},
+    { page:1, label:"피드 첫 칸 · 세계관 속 캐릭터의 역할", box:{x:1.9,y:69.31,w:31.81,h:28.34},
       kick:"피드 첫 칸 · 필수", title:"세계관 속 캐릭터의 역할",
       points:["첫 칸은 꼭 <b>역할</b>이 보이는 그림", "직업·소속뿐 아니라 이야기 속 <b>기능</b>(주인공의 조력자, 메인 빌런, 라이벌 등)도 역할", "그림만 봐도 역할이 보이게"],
       ex:"가족을 지키는 가장" },
-    { page:1, label:"피드 2·3칸 · 자유 주제", box:{x:34.32,y:74.46,w:63.31,h:22.18},
+    { page:1, label:"피드 2·3칸 · 자유 주제", box:{x:34.09,y:69.31,w:64,h:28.34},
       kick:"피드 2·3칸", title:"자유 주제",
       points:["캐릭터가 <b>직접 올렸을 법한</b> 사진 두 장", "작품 속 <b>기억에 남는 장면</b>을 게시물로 바꿔도 좋음", "세 칸을 이어 보면 하나의 이야기가 되게"],
       ex:"이사 온 날 · 결혼식" },
     { page:2, kick:"SNS 프로필 활동지 · 2쪽", title:"스토리 2개",
       points:["주제: <b>내 캐릭터는 여가 시간에 무엇을 하고 있을까?</b>", "그 순간을 한 장씩 그리고 <b>글 한 줄</b>과 스티커", "막히면 소지품·OOTD, 한 순간, 기분 한 장, 질문 스티커, 비포&애프터 중에서 골라 보기"] },
-    { page:2, label:"스토리 1", box:{x:5.71,y:22.01,w:42.86,h:53.87},
+    { page:2, label:"스토리 1", box:{x:5.71,y:22.52,w:42.86,h:53.87},
       kick:"스토리 1", title:"여가 시간의 한 장면",
       points:["위쪽 작은 동그라미에 <b>프로필 얼굴</b>, 옆 줄에 <b>아이디</b>", "화면 위에 캐릭터가 쓴 <b>글 한 줄</b>", "투표·질문·이모지 <b>스티커</b>를 붙이듯 그림"] },
-    { page:2, label:"공개 범위 · 고리 색", box:{x:5.71,y:22.01,w:88.58,h:53.87},
+    { page:2, label:"공개 범위 · 고리 색", box:{x:5.71,y:22.52,w:88.58,h:53.87},
       kick:"공개 범위", title:"누구에게 보여 줄까?",
       points:["<span class='sw all'></span><b>전체공개</b>: 고리를 빨강·주황·보라 계열로. 누구에게 보여도 괜찮은 모습", "<span class='sw cf'></span><b>친한친구</b>: 고리를 초록으로. 속마음, 숨은 모습", "2개를 어떻게 나눌지도 <b>캐릭터 해석</b>"],
       ex:"스토리 5개 중 마지막 하나만 <span class='sw cf'></span>친한친구" },
@@ -154,6 +155,7 @@ function go(i){
   if(s.box){
     Object.assign(sp.style,{left:s.box.x+'%',top:s.box.y+'%',width:s.box.w+'%',height:s.box.h+'%'});
     sp.classList.toggle('round',!!s.round); sp.classList.toggle('below',!!s.below||s.box.y<10);
+    const c=s.box.x+s.box.w/2; sp.classList.toggle('tl',c<22); sp.classList.toggle('tr',c>78);
     $('tag').textContent=s.label; sp.classList.add('on');
   } else sp.classList.remove('on');
   document.querySelectorAll('#dots [data-p]').forEach(b=>b.classList.toggle('on',+b.dataset.p===s.page));
