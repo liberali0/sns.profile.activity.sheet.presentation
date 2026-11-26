@@ -51,8 +51,6 @@ body.present .pnote{opacity:1;transform:translate(0,-50%)}
 .pnote li{font-size:clamp(17px,1.35vw,23px);line-height:1.55;padding-left:22px;position:relative;color:#2b2e38}
 .pnote li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:9px;border-radius:50%;background:#d62976}
 .pnote li b{color:#111}
-.pnote .ex{margin-top:24px;padding:14px 18px;border-radius:14px;background:#f6f6f9;font-size:clamp(15px,1.15vw,19px);line-height:1.55;color:#3a3d47}
-.pnote .ex .eh{display:block;font-size:13px;font-weight:700;color:#d62976;margin-bottom:4px;letter-spacing:.02em}
 .sw{display:inline-block;width:.8em;height:.8em;border-radius:50%;vertical-align:-.05em;margin:0 3px}
 .sw.all{background:conic-gradient(var(--ring1),var(--ring2),var(--ring3),var(--ring4),var(--ring1))}
 .sw.cf{background:var(--cf)}
@@ -80,7 +78,6 @@ body.present .pnote{opacity:1;transform:translate(0,-50%)}
 /* =========================================================
    CONFIG: 여기 글만 고치면 설명이 바뀜.  <b>굵게</b> 사용 가능
    box: 활동지 한 쪽 기준 % 좌표 (x, y, w, h)
-   ex: "예시작에서는" 칸에 들어갈 한대길 예시 (비워 두면 안 나옴)
    ========================================================= */
 const CONFIG = {
   pages: ["1쪽 프로필", "2쪽 스토리", "3쪽 작성 요령"],
@@ -89,35 +86,28 @@ const CONFIG = {
       points:["1차시에 만든 <b>오리지널 캐릭터</b>의 계정이라고 생각하고 채움", "완성하면 <b>실제 인스타 프로필</b>처럼 보이도록 칸을 그대로 옮김", "1쪽에 프로필·하이라이트·피드, 2쪽에 스토리, 3쪽은 작성 요령"] },
     { page:1, label:"프로필 사진", box:{x:6.19,y:7.75,w:27.62,h:19.53}, round:true, below:true,
       kick:"프로필 사진", title:"캐릭터의 얼굴을 크게",
-      points:["큰 동그라미 안에 <b>캐릭터 얼굴</b>을 그림", "스토리를 올렸으니 바깥 <b>고리는 색칠</b>", "고리 색은 2쪽 스토리의 공개 범위와 같은 색"],
-      ex:"한대길의 얼굴, 고리는 <span class='sw all'></span>전체공개 색" },
+      points:["큰 동그라미 안에 <b>캐릭터 얼굴</b>을 그림", "스토리를 올렸으니 바깥 <b>고리는 색칠</b>", "고리 색은 2쪽 스토리의 공개 범위와 같은 색"] },
     { page:1, label:"아이디", box:{x:37.3,y:11.2,w:57,h:5.2},
       kick:"아이디", title:"이름 하나로 캐릭터가 보이게",
-      points:["<b>영어 소문자·숫자·밑줄(_)·마침표(.)</b>만 사용", "캐릭터 이름, 별명, 특징을 섞어서 만듦", "가장 크게, 프로필 사진 오른쪽 맨 위에"],
-      ex:"daegil.han" },
+      points:["<b>영어 소문자·숫자·밑줄(_)·마침표(.)</b>만 사용", "캐릭터 이름, 별명, 특징을 섞어서 만듦", "가장 크게, 프로필 사진 오른쪽 맨 위에"] },
     { page:1, label:"이름 · 게시물 · 팔로워 · 팔로잉", box:{x:37.3,y:17,w:57,h:6.8},
       kick:"이름 · 숫자", title:"숫자도 캐릭터 해석",
-      points:["아이디 아래 줄에 <b>캐릭터 이름</b>", "<b>팔로워·팔로잉</b>은 세계관 속 유명한 정도, 사교성에 맞게", "게시물 수도 학생이 직접 정함"],
-      ex:"한대길 · 팔로워 108 / 팔로잉 93, 동네에서 아는 사람 많은 목수" },
+      points:["아이디 아래 줄에 <b>캐릭터 이름</b>", "<b>팔로워·팔로잉</b>은 세계관 속 유명한 정도, 사교성에 맞게", "게시물 수도 학생이 직접 정함"] },
     { page:1, label:"직업", box:{x:5.4,y:28.8,w:22,h:3.9},
       kick:"직업", title:"세계관 속에서 하는 일",
-      points:["짧은 밑줄에 캐릭터의 <b>직업이나 소속</b>을 한 단어로", "실제 인스타의 '카테고리' 자리", "소개란과 피드 첫 칸으로 이어지는 단서"],
-      ex:"목수" },
+      points:["짧은 밑줄에 캐릭터의 <b>직업이나 소속</b>을 한 단어로", "실제 인스타의 '카테고리' 자리", "소개란과 피드 첫 칸으로 이어지는 단서"] },
     { page:1, label:"소개 세 줄", box:{x:5.4,y:31.9,w:89.2,h:12.6},
       kick:"소개", title:"캐릭터가 자기를 소개하는 세 줄",
       points:["<b>소속, 성격, 좋아하는 것, 말버릇</b>을 한 줄씩", "글은 모두 <b>캐릭터의 말투</b>로", "이모지·해시태그도 좋음"] },
     { page:1, label:"스토리 하이라이트 (선택)", box:{x:5.1,y:49.9,w:57.9,h:15.2},
       kick:"하이라이트 · 선택", title:"프로필에 고정해 두는 이야기",
-      points:["<b>0~3개</b>, 만들지 말지 스스로 정함", "동그라미에 표지 그림, 아래에 <b>짧은 제목</b>", "안 만들면 비워 둬도 됨"],
-      ex:"🧡랑아🧡 / 🤍호야🤍 / 💛은향이💛, 대길이 아끼는 가족" },
+      points:["<b>0~3개</b>, 만들지 말지 스스로 정함", "동그라미에 표지 그림, 아래에 <b>짧은 제목</b>", "안 만들면 비워 둬도 됨"] },
     { page:1, label:"피드 첫 칸 · 세계관 속 캐릭터의 역할", box:{x:1.9,y:69.31,w:31.81,h:28.34},
       kick:"피드 첫 칸 · 필수", title:"세계관 속 캐릭터의 역할",
-      points:["첫 칸은 꼭 <b>역할</b>이 보이는 그림", "직업·소속뿐 아니라 이야기 속 <b>기능</b>(주인공의 조력자, 메인 빌런, 라이벌 등)도 역할", "그림만 봐도 역할이 보이게"],
-      ex:"가족을 지키는 가장" },
+      points:["첫 칸은 꼭 <b>역할</b>이 보이는 그림", "직업·소속뿐 아니라 이야기 속 <b>기능</b>(주인공의 조력자, 메인 빌런, 라이벌 등)도 역할", "그림만 봐도 역할이 보이게"] },
     { page:1, label:"피드 2·3칸 · 자유 주제", box:{x:34.09,y:69.31,w:64,h:28.34},
       kick:"피드 2·3칸", title:"자유 주제",
-      points:["캐릭터가 <b>직접 올렸을 법한</b> 사진 두 장", "작품 속 <b>기억에 남는 장면</b>을 게시물로 바꿔도 좋음", "세 칸을 이어 보면 하나의 이야기가 되게"],
-      ex:"이사 온 날 · 결혼식" },
+      points:["캐릭터가 <b>직접 올렸을 법한</b> 사진 두 장", "작품 속 <b>기억에 남는 장면</b>을 게시물로 바꿔도 좋음", "세 칸을 이어 보면 하나의 이야기가 되게"] },
     { page:2, kick:"SNS 프로필 활동지 · 2쪽", title:"스토리 2개",
       points:["주제: <b>내 캐릭터는 여가 시간에 무엇을 하고 있을까?</b>", "그 순간을 한 장씩 그리고 <b>글 한 줄</b>과 스티커", "막히면 소지품·OOTD, 한 순간, 기분 한 장, 질문 스티커, 비포&애프터 중에서 골라 보기"] },
     { page:2, label:"스토리 1", box:{x:5.71,y:22.52,w:42.86,h:53.87},
@@ -125,10 +115,9 @@ const CONFIG = {
       points:["위쪽 작은 동그라미에 <b>프로필 얼굴</b>, 옆 줄에 <b>아이디</b>", "화면 위에 캐릭터가 쓴 <b>글 한 줄</b>", "투표·질문·이모지 <b>스티커</b>를 붙이듯 그림"] },
     { page:2, label:"공개 범위 · 고리 색", box:{x:5.71,y:22.52,w:88.58,h:53.87},
       kick:"공개 범위", title:"누구에게 보여 줄까?",
-      points:["<span class='sw all'></span><b>전체공개</b>: 고리를 빨강·주황·보라 계열로. 누구에게 보여도 괜찮은 모습", "<span class='sw cf'></span><b>친한친구</b>: 고리를 초록으로. 속마음, 숨은 모습", "2개를 어떻게 나눌지도 <b>캐릭터 해석</b>"],
-      ex:"스토리 5개 중 마지막 하나만 <span class='sw cf'></span>친한친구" },
+      points:["<span class='sw all'></span><b>전체공개</b>: 고리를 빨강·주황·보라 계열로. 누구에게 보여도 괜찮은 모습", "<span class='sw cf'></span><b>친한친구</b>: 고리를 초록으로. 속마음, 숨은 모습", "2개를 어떻게 나눌지도 <b>캐릭터 해석</b>"] },
     { page:3, kick:"SNS 프로필 활동지 · 3쪽", title:"작성 요령",
-      points:["칸마다 <b>무엇을, 어떻게</b> 쓰는지 한 장에 정리", "학생이 활동 중에 <b>혼자 보고</b> 따라 할 수 있게", "<b>공개 범위</b> 색 규칙도 여기에 함께 정리"] }
+      points:["칸마다 <b>무엇을, 어떻게</b> 쓰는지 한 장에 정리", "학생이 활동 중에 <b>혼자 보고</b> 따라 할 수 있게", "<b>공개 범위</b> 색 규칙도 여기에 함께 정리", "이제 <b>예시작</b>으로 이 칸들이 채워진 모습을 봐요"] }
   ]
 };
 /* ========================================================= */
@@ -160,7 +149,7 @@ function go(i){
   } else sp.classList.remove('on');
   document.querySelectorAll('#dots [data-p]').forEach(b=>b.classList.toggle('on',+b.dataset.p===s.page));
   $('prog').textContent=(i+1)+' / '+S.length;
-  $('pnote').innerHTML=`<div class="fade"><span class="kick">${s.kick||''}</span><h2>${s.title||''}</h2><ul>${(s.points||[]).map(t=>`<li>${t}</li>`).join('')}</ul>${s.ex?`<div class="ex"><span class="eh">예시작 · 한대길</span>${s.ex}</div>`:''}</div>`;
+  $('pnote').innerHTML=`<div class="fade"><span class="kick">${s.kick||''}</span><h2>${s.title||''}</h2><ul>${(s.points||[]).map(t=>`<li>${t}</li>`).join('')}</ul></div>`;
 }
 
 document.addEventListener('keydown',e=>{
